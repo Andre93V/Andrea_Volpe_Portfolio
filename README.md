@@ -3,7 +3,7 @@
 
 > *Nine years building supply chains that hold under pressure — in multinational manufacturing, across two continents of stakeholders, through ownership transitions nobody planned for.*
 
-🌐 **[Portfolio → andrea-volpe.github.io](https://andrea-volpe.github.io/)**
+🌐 **[Portfolio → Vai al sito](https://andre93v.github.io/Andrea_Volpe_Portfolio/)**
 
 ---
 
