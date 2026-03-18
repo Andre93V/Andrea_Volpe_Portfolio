@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrea Volpe — Supply Chain & Operations Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=Familjen+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white:   #ffffff;
+  --off:     #f8f8f6;
+  --light:   #f0efec;
+  --border:  #e2e0dc;
+  --muted:   #9b9892;
+  --body:    #3d3c3a;
+  --ink:     #141412;
+  --accent:  #2563eb;   /* clean blue — professional but energetic */
+  --accent2: #0ea5e9;   /* sky for secondary */
+  --green:   #16a34a;   /* for positive metrics */
+  --sans:    'DM Sans', system-ui, sans-serif;
+  --display: 'Familjen Grotesk', 'DM Sans', sans-serif;
+  --radius:  6px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--off); color: var(--body); font-family: var(--sans); line-height: 1.65; overflow-x: hidden; }
+
+/* ── NAV ─────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 2.5rem; height: 60px;
+  background: rgba(248,248,246,0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 0.25rem; list-style: none; }
+.nav-links a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius);
+  transition: color 0.15s, background 0.15s;
+}
+.nav-links a:hover { color: var(--ink); background: var(--light); }
+
+/* ── HERO ────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  padding-top: 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.hero-left {
+  padding: 6rem 3rem 5rem 3rem;
+  display: flex; flex-direction: column; justify-content: center;
+  border-right: 1px solid var(--border);
+}
+.hero-chip {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(37,99,235,0.07);
+  border: 1px solid rgba(37,99,235,0.18);
+  padding: 0.3rem 0.85rem;
+  border-radius: 100px;
+  margin-bottom: 1.8rem;
+  width: fit-content;
+}
+.hero-chip::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+.hero-name {
+  font-family: var(--display);
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+.hero-name span { color: var(--accent); }
+
+.hero-sub {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-desc {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--body);
+  max-width: 460px;
+  margin-bottom: 2.5rem;
+}
+.hero-desc strong { color: var(--ink); font-weight: 600; }
+
+.hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.btn {
+  font-size: 0.82rem; font-weight: 600;
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: all 0.18s;
+  display: inline-block;
+  border: 1.5px solid transparent;
+}
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary:hover { background: #1d4ed8; border-color: #1d4ed8; }
+.btn-ghost { background: transparent; color: var(--body); border-color: var(--border); }
+.btn-ghost:hover { border-color: var(--muted); color: var(--ink); }
+
+/* ── HERO RIGHT — STATS ─────────────────────────────────── */
+.hero-right {
+  padding: 6rem 3rem 5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  align-content: start;
+  padding-top: 6rem;
+}
+.stat-cell {
+  background: var(--off);
+  padding: 2rem 1.8rem;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  opacity: 0; transform: translateY(10px);
+  animation: up 0.4s forwards;
+  transition: background 0.18s;
+  text-decoration: none;
+}
+.stat-cell:hover { background: var(--white); }
+.stat-cell:nth-child(1) { animation-delay: 0.1s; }
+.stat-cell:nth-child(2) { animation-delay: 0.2s; }
+.stat-cell:nth-child(3) { animation-delay: 0.3s; }
+.stat-cell:nth-child(4) { animation-delay: 0.4s; }
+.stat-cell:nth-child(5) { animation-delay: 0.5s; }
+.stat-cell:nth-child(6) { animation-delay: 0.6s; }
+@keyframes up { to { opacity: 1; transform: translateY(0); } }
+
+.stat-num {
+  font-family: var(--display);
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.stat-num.blue { color: var(--accent); }
+.stat-num.green { color: var(--green); }
+.stat-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── SECTIONS ────────────────────────────────────────────── */
+.section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 6rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.sec-head {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+.sec-tag {
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(37,99,235,0.07);
+  padding: 0.25rem 0.65rem;
+  border-radius: 100px;
+}
+.sec-title {
+  font-family: var(--display);
+  font-size: 1.9rem; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.02em;
+}
+.sec-line { flex: 1; height: 1px; background: var(--border); }
+
+/* reveal */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── ABOUT ───────────────────────────────────────────────── */
+.about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 4rem; align-items: start; }
+.about-text { font-size: 0.97rem; line-height: 1.9; }
+.about-text p { margin-bottom: 1.2rem; color: var(--body); }
+.about-text strong { color: var(--ink); font-weight: 600; }
+.about-text p:last-child { margin-bottom: 0; }
+
+.info-cards { display: flex; flex-direction: column; gap: 0.75rem; }
+.info-card {
+  padding: 1.2rem 1.4rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.info-card-label {
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 0.4rem;
+}
+.info-card-val { font-size: 0.88rem; color: var(--ink); font-weight: 400; line-height: 1.6; }
+
+/* ── PORTFOLIO ───────────────────────────────────────────── */
+.projects { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.project {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.8rem 2rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+  scroll-margin-top: 80px;
+}
+.project:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); transform: translateY(-2px); }
+.project.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 2.5rem; align-items: start; }
+.project-chip {
+  display: inline-block;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(37,99,235,0.07);
+  padding: 0.2rem 0.6rem; border-radius: 100px;
+  margin-bottom: 0.8rem;
+}
+.project-title {
+  font-family: var(--display);
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--ink); line-height: 1.2;
+  margin-bottom: 0.8rem; letter-spacing: -0.01em;
+}
+.project-desc { font-size: 0.875rem; line-height: 1.8; color: var(--body); margin-bottom: 1.2rem; }
+
+.metrics { display: flex; flex-direction: column; gap: 0; }
+.metric-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.metric-row:first-child { border-top: 1px solid var(--border); padding-top: 0.75rem; }
+.metric-key { font-size: 0.72rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.metric-val {
+  font-family: var(--display);
+  font-size: 1.3rem; font-weight: 700;
+  color: var(--accent); letter-spacing: -0.02em;
+}
+.metric-val.green { color: var(--green); }
+.metric-val.sm { font-size: 0.9rem; font-family: var(--sans); font-weight: 600; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+.tag {
+  font-size: 0.68rem; font-weight: 500;
+  padding: 0.25rem 0.65rem;
+  background: var(--light);
+  color: var(--body);
+  border-radius: 100px;
+  border: 1px solid var(--border);
+}
+
+/* ── TIMELINE ────────────────────────────────────────────── */
+.timeline { position: relative; padding-left: 1.5rem; }
+.timeline::before {
+  content: ''; position: absolute;
+  left: 0; top: 8px; bottom: 0;
+  width: 1px; background: var(--border);
+}
+.tl { position: relative; padding: 0 0 3rem 2rem; }
+.tl::before {
+  content: ''; position: absolute;
+  left: -1.5rem; top: 7px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--off);
+}
+.tl.now::before { background: var(--accent); border-color: var(--accent); }
+
+.tl-date { font-size: 0.72rem; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.3rem; }
+.tl-role { font-family: var(--display); font-size: 1.1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.15rem; letter-spacing: -0.01em; }
+.tl-co { font-size: 0.82rem; font-weight: 500; color: var(--muted); margin-bottom: 1rem; }
+.tl-body { font-size: 0.88rem; line-height: 1.8; color: var(--body); margin-bottom: 0.8rem; max-width: 660px; }
+.tl-list { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; max-width: 660px; }
+.tl-list li { font-size: 0.875rem; color: var(--body); padding-left: 1.1rem; position: relative; line-height: 1.7; }
+.tl-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.8rem; }
+.tl-list li strong { color: var(--ink); font-weight: 600; }
+
+/* ── SKILLS ──────────────────────────────────────────────── */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.skill-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.6rem;
+}
+.skill-card-title {
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.2rem;
+}
+.skill-item { margin-bottom: 0.9rem; }
+.skill-top { display: flex; justify-content: space-between; margin-bottom: 0.35rem; }
+.skill-name { font-size: 0.85rem; font-weight: 400; color: var(--ink); }
+.skill-lvl { font-size: 0.65rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.bar { height: 3px; background: var(--light); border-radius: 2px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--accent); width: 0; transition: width 1.1s cubic-bezier(0.4,0,0.2,1); border-radius: 2px; }
+.bar-fill.sky { background: var(--accent2); }
+.bar-fill.green { background: var(--green); }
+
+/* ── LANG GRID ───────────────────────────────────────────── */
+.lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+
+/* ── EDUCATION ───────────────────────────────────────────── */
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+.edu-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.6rem;
+  border-top: 3px solid var(--accent);
+}
+.edu-degree { font-family: var(--display); font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.25rem; }
+.edu-school { font-size: 0.8rem; font-weight: 600; color: var(--accent); margin-bottom: 0.2rem; }
+.edu-period { font-size: 0.72rem; color: var(--muted); margin-bottom: 0.8rem; }
+.edu-note { font-size: 0.85rem; color: var(--body); line-height: 1.65; }
+
+.cert-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.5rem; }
+.cert {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.8rem 1rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: background 0.15s;
+}
+.cert:hover { background: var(--light); }
+.cert-year { font-family: var(--display); font-size: 0.9rem; font-weight: 700; color: var(--accent); min-width: 2.5rem; }
+.cert-name { font-size: 0.83rem; color: var(--body); line-height: 1.35; }
+
+/* ── CONTACT ─────────────────────────────────────────────── */
+.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.contact-heading {
+  font-family: var(--display);
+  font-size: 1.9rem; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.02em;
+  line-height: 1.2; margin-bottom: 1rem;
+}
+.contact-heading span { color: var(--accent); }
+.contact-note { font-size: 0.9rem; line-height: 1.8; color: var(--body); margin-bottom: 2rem; }
+.contact-cells { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+.contact-cell {
+  padding: 1rem 1.2rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: background 0.15s;
+}
+.contact-cell:hover { background: var(--light); }
+.contact-cell-label { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+.contact-cell-val { font-size: 0.88rem; font-weight: 500; color: var(--ink); word-break: break-word; }
+.contact-cell-val a { color: var(--accent); text-decoration: none; }
+.contact-cell-val a:hover { text-decoration: underline; }
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+footer {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  padding: 2rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 100%;
+}
+footer p { font-size: 0.78rem; color: var(--muted); }
+footer strong { color: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Andrea <span>Volpe</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-chip">Supply Chain · Operations · Industrial Management</div>
+    <h1 class="hero-name">Andrea<br><span>Volpe</span></h1>
+    <div class="hero-sub">Supply Chain & Operations Manager · MSc SUPSI · Ticino </div>
+    <p class="hero-desc">
+      Nine years building supply chains that hold under pressure — in multinational manufacturing, across two continents of stakeholders, through ownership transitions nobody planned for.
+      <br><br>
+      I bridge the gap between <strong>technical data and human processes</strong>. Whether leveraging Excel, Power BI, or Python to extract insights, or building workflows that actually work for the people using them — I focus on staying analytical when operations get volatile.
+    </p>
+    <div class="hero-cta">
+      <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
+      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <a href="#experience" class="stat-cell">
+      <div class="stat-num blue">9+</div>
+      <div class="stat-label">Years experience</div>
+    </a>
+    <a href="#project-capex" class="stat-cell">
+      <div class="stat-num blue">€5M</div>
+      <div class="stat-label">CAPEX managed</div>
+    </a>
+    <a href="#project-crisis" class="stat-cell">
+      <div class="stat-num green">&gt;95%</div>
+      <div class="stat-label">OTIF during crisis</div>
+    </a>
+    <a href="#project-capex" class="stat-cell">
+      <div class="stat-num">5–8×</div>
+      <div class="stat-label">Throughput gain</div>
+    </a>
+    <a href="#project-capex" class="stat-cell">
+      <div class="stat-num">–30%</div>
+      <div class="stat-label">Cost reduction</div>
+    </a>
+    <a href="#project-capex" class="stat-cell">
+      <div class="stat-num blue">5</div>
+      <div class="stat-label">Tier-1 OEM clients</div>
+    </a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="sec-head reveal">
+    <span class="sec-tag">01</span>
+    <h2 class="sec-title">About</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I specialise in Supply Chain and Operations — the critical intersection where strategic planning meets the unpredictable reality of the shop floor. With a foundation in precision manufacturing for automotive and aerospace, I have built my career in environments where precision is a baseline requirement, not an aspiration.</p>
+      <p>Over nine years I have progressed from lean improvement and procurement to leading end-to-end supply chain operations. My track record includes managing a <strong>€5M automation programme</strong> at TE Connectivity — serving Volkswagen Group, Mercedes-Benz, PSA, Renault, and Jaguar Land Rover — with direct reporting to Finance EMEA and stakeholder management across EMEA, Asia, and the US.</p>
+      <p>In my current role at Lemco Precision, I navigated a <strong>complex ERP migration during a corporate transition</strong> and maintained OTIF above 95% during a high-stakes plant transfer — simultaneously managing the ISO 9100 certification upgrade and a team of four direct reports.</p>
+      <p>Outside of pure operations, I have developed real digital skills: Python for data work, Power BI for reporting, and hands-on IoT/MDM system builds. I use AI tools actively in my daily workflow.</p>
+    </div>
+    <div class="info-cards">
+      <div class="info-card">
+        <div class="info-card-label">Location</div>
+        <div class="info-card-val">Venegono Superiore (VA), Italy </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Education</div>
+        <div class="info-card-val">MSc Engineering (Business & Production)<br>SUPSI, Bioggio — Grade A<br><br>BSc Management Engineering<br>SUPSI · Erasmus Luzern — Grade 6/6</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-label">Languages</div>
+        <div class="info-card-val">Italian — Native · English B2 (operational EMEA/Asia/US)<br>German A2 · French reading</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section" id="portfolio">
+  <div class="sec-head reveal">
+    <span class="sec-tag">02</span>
+    <h2 class="sec-title">Portfolio</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="projects">
+
+    <div class="project wide reveal" id="project-capex">
+      <div>
+        <div class="project-chip">CAPEX · Automation · EMEA</div>
+        <div class="project-title">€5M Automation Programme<br>TE Connectivity — HEMS</div>
+        <p class="project-desc">Led the full lifecycle of the Hybrid & Electric Mobility Solutions capital investment programme at the Bioggio site. Managed design, multi-supplier RFQ, and implementation of automated high-speed production lines, which led to 5–8× throughput and –30% cost via automation. Dual reporting to Finance EMEA and PM EMEA. Stakeholder interface across EMEA, Asia, and US — including direct contact with Jaguar Land Rover account management. All lines reached full capacity before the announced site closure.</p>
+        <div class="tags">
+          <span class="tag">CAPEX Management</span><span class="tag">Automotive OEM</span><span class="tag">Multi-supplier RFQ</span><span class="tag">EMEA Stakeholders</span><span class="tag">Finance Reporting</span>
+        </div>
+      </div>
+      <div class="metrics">
+        <div class="metric-row"><span class="metric-key">Programme value</span><span class="metric-val">€5M</span></div>
+        <div class="metric-row"><span class="metric-key">Throughput gain</span><span class="metric-val">5–8×</span></div>
+        <div class="metric-row"><span class="metric-key">Cost reduction</span><span class="metric-val">–30%</span></div>
+        <div class="metric-row"><span class="metric-key">OEM clients</span><span class="metric-val">5</span></div>
+        <div class="metric-row"><span class="metric-key">Delivery</span><span class="metric-val sm green">On-time, pre-closure</span></div>
+      </div>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-chip">ERP · Change Management</div>
+      <div class="project-title">SAP → LogyPlan ERP Migration</div>
+      <p class="project-desc">Led the full ERP migration at Lemco Precision during an active ownership transition. Scope: process redesign, master data migration, team training, go-live — in parallel with ISO 9100 certification upgrade.</p>
+      <div class="metrics">
+        <div class="metric-row"><span class="metric-key">Parallel workstreams</span><span class="metric-val sm">ERP + ISO 9100 + Transition</span></div>
+      </div>
+      <div class="tags"><span class="tag">SAP</span><span class="tag">LogyPlan</span><span class="tag">Process Redesign</span><span class="tag">ISO 9100</span></div>
+    </div>
+
+    <div class="project reveal" id="project-crisis">
+      <div class="project-chip">Crisis Management · Leadership</div>
+      <div class="project-title">Business Continuity Through Ownership Transition</div>
+      <p class="project-desc">Steered the Bioggio site through a full closure announcement and acquisition. Rebuilt supply chain processes under the new ownership structure while maintaining uninterrupted delivery for aerospace and automotive customers.</p>
+      <div class="metrics">
+        <div class="metric-row"><span class="metric-key">OTIF maintained</span><span class="metric-val green">&gt;95%</span></div>
+        <div class="metric-row"><span class="metric-key">Critical disruptions</span><span class="metric-val">Zero</span></div>
+      </div>
+      <div class="tags"><span class="tag">Risk Management</span><span class="tag">Team Leadership</span><span class="tag">Aerospace</span></div>
+    </div>
+
+    <div class="project reveal">
+      <div class="project-chip">Lean · BI · Continuous Improvement</div>
+      <div class="project-title">KPI Framework & Lean Transformation</div>
+      <p class="project-desc">Co-designed and deployed a site-wide KPI framework and performance monitoring dashboard (PIM) at TE Connectivity, combining VSM analysis with structured target-setting across production families.</p>
+      <div class="tags"><span class="tag">VSM</span><span class="tag">KPI Design</span><span class="tag">Power BI</span><span class="tag">Lean Six Sigma</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="sec-head reveal">
+    <span class="sec-tag">03</span>
+    <h2 class="sec-title">Experience</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="timeline">
+
+    <div class="tl now reveal">
+      <div class="tl-date">Jan 2023 — Present</div>
+      <div class="tl-role">Supply Chain Manager</div>
+      <div class="tl-co">Lemco Precision SA · Bioggio, CH — formerly Carlisle Interconnect Technology</div>
+      <p class="tl-body">Appointed SCM through an ownership transition. Led a team of 4 across procurement, planning, logistics, and shipments — while simultaneously managing site reconfiguration, ERP migration, and ISO 9100 upgrade.</p>
+      <ul class="tl-list">
+        <li><strong>&gt;95% OTIF</strong> maintained throughout plant transfer and capacity reduction</li>
+        <li><strong>ERP migration SAP → LogyPlan</strong> led end-to-end: process redesign, training, go-live</li>
+        <li><strong>Zero critical disruptions</strong> during full ownership change</li>
+        <li><strong>ISO 9100 upgrade</strong> delivered within transition timeline</li>
+      </ul>
+    </div>
+
+    <div class="tl reveal">
+      <div class="tl-date">Oct 2019 — Dec 2022</div>
+      <div class="tl-role">Junior Project Manager — HEMS Product Line</div>
+      <div class="tl-co">TE Connectivity Solution GmbH · Bioggio, CH</div>
+      <p class="tl-body">Led the Hybrid & Electric Mobility Solutions capital programme. Dual reporting to Finance EMEA and PM EMEA. OEM customers: Volkswagen Group, Mercedes-Benz, PSA, Renault, Jaguar Land Rover.</p>
+      <ul class="tl-list">
+        <li><strong>€5M CAPEX</strong> — full lifecycle from RFQ through ramp-up and site transfer</li>
+        <li><strong>5–8× throughput</strong> and –30% cost via automation</li>
+        <li>All lines operational before closure, smooth transfer secured</li>
+      </ul>
+    </div>
+
+    <div class="tl reveal">
+      <div class="tl-date">Oct 2018 — Oct 2019</div>
+      <div class="tl-role">Continuous Improvement Analyst</div>
+      <div class="tl-co">TE Connectivity Solution GmbH · Bioggio, CH</div>
+      <ul class="tl-list">
+        <li>VSM-based lean transformation and production family segmentation</li>
+        <li>KPI framework co-designed and deployed site-wide</li>
+        <li>Performance monitoring dashboard (PIM) co-developed</li>
+      </ul>
+    </div>
+
+    <div class="tl reveal">
+      <div class="tl-date">Mar 2017 — Sep 2018</div>
+      <div class="tl-role">Strategic Source Analyst & Planner</div>
+      <div class="tl-co">TE Connectivity Solution GmbH · Bioggio, CH</div>
+      <ul class="tl-list">
+        <li>Production planning, procurement, and subcontracting via SAP across multiple product lines</li>
+        <li>Metal alloy availability and supplier alignment management</li>
+      </ul>
+    </div>
+
+    <div class="tl reveal">
+      <div class="tl-date">Apr 2015 — Feb 2017</div>
+      <div class="tl-role">Accounting Support & TEOA Technician</div>
+      <div class="tl-co">TE Connectivity Solution GmbH · Bioggio, CH</div>
+      <ul class="tl-list">
+        <li>Cost, budgeting and demand variability dashboards</li>
+        <li>BSc thesis on Value Stream Mapping; initial CI initiatives</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="sec-head reveal">
+    <span class="sec-tag">04</span>
+    <h2 class="sec-title">Skills</h2>
+    <div class="sec-line"></div>
+  </div>
+
+  <div class="skills-grid reveal">
+    <div class="skill-card">
+      <div class="skill-card-title">ERP & Systems</div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">SAP ERP</span><span class="skill-lvl">Advanced</span></div>
+        <div class="bar"><div class="bar-fill" data-width="82"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">LogyPlan ERP</span><span class="skill-lvl">Advanced</span></div>
+        <div class="bar"><div class="bar-fill" data-width="80"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">Hydra MES</span><span class="skill-lvl">Proficient</span></div>
+        <div class="bar"><div class="bar-fill" data-width="65"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">FileMaker</span><span class="skill-lvl">Proficient</span></div>
+        <div class="bar"><div class="bar-fill" data-width="65"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">Arena Simulation</span><span class="skill-lvl">Base</span></div>
+        <div class="bar"><div class="bar-fill" data-width="45"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-title">Analytics & Digital</div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">Microsoft Excel</span><span class="skill-lvl">Expert</span></div>
+        <div class="bar"><div class="bar-fill" data-width="95"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">Power BI</span><span class="skill-lvl">Advanced</span></div>
+        <div class="bar"><div class="bar-fill" data-width="78"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">Python</span><span class="skill-lvl">Applied</span></div>
+        <div class="bar"><div class="bar-fill sky" data-width="60"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">SQL / HTML</span><span class="skill-lvl">Applied</span></div>
+        <div class="bar"><div class="bar-fill sky" data-width="55"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">MS Project / Visio</span><span class="skill-lvl">Advanced</span></div>
+        <div class="bar"><div class="bar-fill" data-width="78"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-title">Methodologies & Ops</div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">CAPEX Project Mgmt</span><span class="skill-lvl">Applied</span></div>
+        <div class="bar"><div class="bar-fill green" data-width="88"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">Risk & Continuity</span><span class="skill-lvl">Applied</span></div>
+        <div class="bar"><div class="bar-fill green" data-width="85"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">Lean / VSM</span><span class="skill-lvl">Applied</span></div>
+        <div class="bar"><div class="bar-fill green" data-width="82"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">EN 9100 / ISO</span><span class="skill-lvl">Applied</span></div>
+        <div class="bar"><div class="bar-fill green" data-width="72"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">IoT / MDM / Kiosk</span><span class="skill-lvl">Applied</span></div>
+        <div class="bar"><div class="bar-fill sky" data-width="55"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="lang-grid reveal">
+    <div class="skill-card">
+      <div class="skill-card-title">Italian</div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">Native speaker</span><span class="skill-lvl">C2</span></div>
+        <div class="bar"><div class="bar-fill" data-width="100"></div></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">English</div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name">Operational — EMEA / Asia / US</span><span class="skill-lvl">B2</span></div>
+        <div class="bar"><div class="bar-fill sky" data-width="72"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section" id="education">
+  <div class="sec-head reveal">
+    <span class="sec-tag">05</span>
+    <h2 class="sec-title">Education & Certifications</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="edu-grid reveal">
+    <div class="edu-card">
+      <div class="edu-degree">MSc Engineering — Business & Production</div>
+      <div class="edu-school">SUPSI, Bioggio (CH)</div>
+      <div class="edu-period">2015 – 2018 · Final Grade: A</div>
+      <div class="edu-note">Operations management, production systems, supply chain strategy. Research integrated with practice at TE Connectivity.</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">BSc Management Engineering</div>
+      <div class="edu-school">SUPSI, Bioggio (CH) · Erasmus: University of Luzern</div>
+      <div class="edu-period">2012 – 2015 · Final Grade: 6/6</div>
+      <div class="edu-note">Industrial engineering with an international semester at Luzern. Thesis on VSM at TE Connectivity Bioggio.</div>
+    </div>
+  </div>
+  <div class="cert-list reveal">
+    <div class="cert"><span class="cert-year">2025</span><span class="cert-name">Power BI — Advanced Training</span></div>
+    <div class="cert"><span class="cert-year">2025</span><span class="cert-name">Google — Intro to Generative AI & LLM</span></div>
+    <div class="cert"><span class="cert-year">2024</span><span class="cert-name">EN 9100 Training Certificate</span></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="sec-head reveal">
+    <span class="sec-tag">06</span>
+    <h2 class="sec-title">Contact</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="contact-wrap reveal">
+    <div>
+      <div class="contact-heading">Open to new<br><span>opportunities</span><br>in Ticino.</div>
+      <a href="mailto:andrea.volpe.1993a@gmail.com" class="btn btn-primary">Send an Email</a>
+    </div>
+    <div class="contact-cells">
+      <div class="contact-cell">
+        <div class="contact-cell-label">Phone</div>
+        <div class="contact-cell-val">+39 333 101 32 33</div>
+      </div>
+      <div class="contact-cell">
+        <div class="contact-cell-label">Location</div>
+        <div class="contact-cell-val">Venegono Superiore (VA)</div>
+      </div>
+      <div class="contact-cell" style="grid-column: 1/-1">
+        <div class="contact-cell-label">Email</div>
+        <div class="contact-cell-val"><a href="mailto:andrea.volpe.1993a@gmail.com" target="_blank">andrea.volpe.1993a@gmail.com</a></div>
+      </div>
+      <div class="contact-cell" style="grid-column: 1/-1">
+        <div class="contact-cell-label">LinkedIn</div>
+        <div class="contact-cell-val"><a href="https://linkedin.com/in/andrea-volpe-9181b31b4" target="_blank">linkedin.com/in/andrea-volpe-9181b31b4</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Andrea Volpe</strong> · Supply Chain & Operations Manager</p>
+  <p>Ticino, CH · © 2025</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 55);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const barObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.bar-fill').forEach(b => b.style.width = b.dataset.width + '%');
+      barObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.skill-card, .skills-grid, .lang-grid').forEach(el => barObs.observe(el));
+</script>
+</body>
+</html>
