@@ -331,7 +331,7 @@ nav {
 .bar-fill.green { background: var(--green); }
 
 /* ── LANG GRID ───────────────────────────────────────────── */
-.lang-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+.lang-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1rem; }
 
 /* ── EDUCATION ───────────────────────────────────────────── */
 .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
@@ -394,60 +394,206 @@ footer {
 }
 footer p { font-size: 0.78rem; color: var(--muted); }
 footer strong { color: var(--ink); font-weight: 600; }
+
+/* ── DARK MODE ───────────────────────────────────────────── */
+[data-theme="dark"] {
+  --white:   #1a1a1a;
+  --off:     #121212;
+  --light:   #1e1e1e;
+  --border:  #2a2a28;
+  --muted:   #8a8985;
+  --body:    #c8c7c5;
+  --ink:     #ededeb;
+  --accent:  #3b82f6;
+  --accent2: #38bdf8;
+  --green:   #22c55e;
+}
+[data-theme="dark"] nav {
+  background: rgba(18,18,18,0.92);
+  border-bottom-color: var(--border);
+}
+[data-theme="dark"] .hero-right { background: var(--border); }
+[data-theme="dark"] .stat-cell { background: var(--off); }
+[data-theme="dark"] .stat-cell:hover { background: var(--light); }
+[data-theme="dark"] .hero-chip {
+  background: rgba(59,130,246,0.12);
+  border-color: rgba(59,130,246,0.25);
+}
+[data-theme="dark"] .project-chip { background: rgba(59,130,246,0.12); }
+[data-theme="dark"] .sec-tag { background: rgba(59,130,246,0.12); }
+[data-theme="dark"] .tag { background: var(--light); border-color: var(--border); }
+[data-theme="dark"] .project:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+[data-theme="dark"] footer { background: var(--light); }
+[data-theme="dark"] .tl::before { background: var(--off); border-color: var(--border); }
+
+/* ── FLOATING TOGGLES ────────────────────────────────────── */
+.floating-toggles {
+  position: fixed; bottom: 1.5rem; right: 1.5rem;
+  display: flex; flex-direction: column; gap: 0.6rem;
+  z-index: 300;
+}
+.toggle-btn {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--ink);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.toggle-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 18px rgba(0,0,0,0.15); }
+[data-theme="dark"] .toggle-btn { box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+[data-theme="dark"] .toggle-btn:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.5); }
+
+.lang-toggle {
+  width: auto; border-radius: 100px;
+  padding: 0 0.15rem; gap: 0;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.03em;
+  overflow: hidden;
+}
+.lang-toggle span {
+  padding: 0.55rem 0.6rem;
+  transition: all 0.2s;
+  border-radius: 100px;
+  line-height: 1;
+}
+.lang-toggle span.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ── HAMBURGER MENU ──────────────────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column; gap: 4px;
+  background: none; border: none;
+  cursor: pointer; padding: 0.5rem;
+  z-index: 210;
+}
+.hamburger span {
+  display: block; width: 20px; height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-left { border-right: none; border-bottom: 1px solid var(--border); padding: 5rem 2.5rem 3rem; }
+  .hero-right { grid-template-columns: 1fr 1fr 1fr; padding: 2rem 2.5rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .contact-wrap { grid-template-columns: 1fr; gap: 2rem; }
+  .project.wide { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .nav-links {
+    position: fixed; top: 60px; left: 0; right: 0;
+    flex-direction: column;
+    background: var(--off);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    gap: 0.25rem;
+    transform: translateY(-120%);
+    transition: transform 0.3s ease;
+    z-index: 199;
+  }
+  [data-theme="dark"] .nav-links { background: var(--off); }
+  .nav-links.open { transform: translateY(0); }
+  .nav-links a { padding: 0.6rem 0.5rem; font-size: 0.9rem; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .projects { grid-template-columns: 1fr; }
+  .edu-grid { grid-template-columns: 1fr; }
+  .hero-right { grid-template-columns: 1fr 1fr; }
+  .section { padding: 4rem 1.5rem; }
+  nav { padding: 0 1.5rem; }
+  .lang-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .hero-left { padding: 4.5rem 1.2rem 2.5rem; }
+  .hero-right { grid-template-columns: 1fr 1fr; padding: 1.5rem 1.2rem; }
+  .hero-name { font-size: clamp(2.2rem, 10vw, 3rem); }
+  .section { padding: 3rem 1rem; }
+  nav { padding: 0 1rem; }
+  .contact-cells { grid-template-columns: 1fr; }
+  .contact-cells .contact-cell[style*="grid-column"] { grid-column: auto; }
+  .cert-list { grid-template-columns: 1fr; }
+  .floating-toggles { bottom: 1rem; right: 1rem; }
+  .toggle-btn { width: 42px; height: 42px; font-size: 1rem; }
+  .stat-cell { padding: 1.4rem 1.2rem; }
+  .stat-num { font-size: 2rem; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  .lang-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
 <nav>
   <div class="nav-logo">Andrea <span>Volpe</span></div>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#portfolio">Portfolio</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about" data-i18n="nav-about">About</a></li>
+    <li><a href="#portfolio" data-i18n="nav-portfolio">Portfolio</a></li>
+    <li><a href="#experience" data-i18n="nav-experience">Expertise</a></li>
+    <li><a href="#skills" data-i18n="nav-skills">Skills</a></li>
+    <li><a href="#education" data-i18n="nav-education">Education</a></li>
+    <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-left">
-    <div class="hero-chip">Supply Chain · Operations · Management</div>
+    <div class="hero-chip" data-i18n="hero-chip">Supply Chain · Operations · Management</div>
     <h1 class="hero-name">Andrea<br><span>Volpe</span></h1>
-    <div class="hero-sub">Supply Chain & Operations Manager · MSc SUPSI · Ticino </div>
-    <p class="hero-desc">
-      9 years of experience navigating high-stakes transitions and €5M+ programmes. Focused on operational resilience, 95%+ OTIF performance, and building the digital tools that make it happen.
+    <div class="hero-sub" data-i18n="hero-sub">Supply Chain & Operations Manager · MSc SUPSI · Ticino </div>
+    <p class="hero-desc" data-i18n="hero-desc">
+      Nine years of hands-on experience in multinational precision manufacturing — working with stakeholders across EMEA, Asia, and the US, and navigating an ownership transition along the way.
+      <br><br>
+      My day-to-day sits at the intersection of <strong>technical data and human processes</strong>. I use Excel, Power BI, and Python to turn numbers into decisions, and I design workflows that genuinely support the people who rely on them every day — always trying to keep a clear head when operations get hectic.
     </p>
     <div class="hero-cta">
-      <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
-      <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      <a href="#portfolio" class="btn btn-primary" data-i18n="hero-cta1">View Portfolio</a>
+      <a href="#contact" class="btn btn-ghost" data-i18n="hero-cta2">Get in Touch</a>
     </div>
   </div>
   <div class="hero-right">
     <a href="#experience" class="stat-cell">
       <div class="stat-num blue">9+</div>
-      <div class="stat-label">Years experience</div>
+      <div class="stat-label" data-i18n="stat-years">Years experience</div>
     </a>
     <a href="#project-capex" class="stat-cell">
       <div class="stat-num blue">€5M</div>
-      <div class="stat-label">CAPEX managed</div>
+      <div class="stat-label" data-i18n="stat-capex">CAPEX managed</div>
     </a>
     <a href="#project-crisis" class="stat-cell">
       <div class="stat-num green">&gt;95%</div>
-      <div class="stat-label">OTIF during crisis</div>
+      <div class="stat-label" data-i18n="stat-otif">OTIF during crisis</div>
     </a>
     <a href="#project-capex" class="stat-cell">
       <div class="stat-num">5–8×</div>
-      <div class="stat-label">Throughput gain</div>
+      <div class="stat-label" data-i18n="stat-throughput">Throughput gain</div>
     </a>
     <a href="#project-capex" class="stat-cell">
       <div class="stat-num">–30%</div>
-      <div class="stat-label">Cost reduction</div>
+      <div class="stat-label" data-i18n="stat-cost">Cost reduction</div>
     </a>
     <a href="#project-capex" class="stat-cell">
       <div class="stat-num blue">5</div>
-      <div class="stat-label">Tier-1 OEM clients</div>
+      <div class="stat-label" data-i18n="stat-oem">Tier-1 OEM clients</div>
     </a>
   </div>
 </div>
@@ -456,15 +602,15 @@ footer strong { color: var(--ink); font-weight: 600; }
 <section class="section" id="about">
   <div class="sec-head reveal">
     <span class="sec-tag">01</span>
-    <h2 class="sec-title">About</h2>
+    <h2 class="sec-title" data-i18n="sec-about">About</h2>
     <div class="sec-line"></div>
   </div>
   <div class="about-grid reveal">
     <div class="about-text">
-      <p>I specialise in Supply Chain and Operations — the critical intersection where strategic planning meets the unpredictable reality of the shop floor. With a foundation in precision manufacturing for automotive and aerospace, I have built my career in environments where precision is a baseline requirement, not an aspiration.</p>
-      <p>Over nine years I have progressed from lean improvement and procurement to leading end-to-end supply chain operations. My track record includes managing a <strong>€5M automation programme</strong> at TE Connectivity — serving Volkswagen Group, Mercedes-Benz, PSA, Renault, and Jaguar Land Rover — with direct reporting to Finance EMEA and stakeholder management across EMEA, Asia, and the US.</p>
-      <p>In my current role at Lemco Precision, I navigated a <strong>complex ERP migration during a corporate transition</strong> and maintained OTIF above 95% during a high-stakes plant transfer — simultaneously managing the EN 9100 certification upgrade and a team of four direct reports.</p>
-      <p>Outside of pure operations, I have developed real digital skills: Python for data work, Power BI for reporting, and hands-on IoT/MDM system builds. I use AI tools actively in my daily workflow.</p>
+      <p data-i18n="about-p1">I specialise in Supply Chain and Operations — the point where strategic planning meets the often unpredictable reality of the shop floor. With a foundation in precision manufacturing for automotive and aerospace, I have built my career in environments where precision is a baseline requirement, not an aspiration.</p>
+      <p data-i18n="about-p2">Over nine years I have grown professionally from continuous improvement and procurement to leading end-to-end supply chain operations. My track record includes managing a <strong>€5M automation programme</strong> at TE Connectivity — serving Volkswagen Group, Mercedes-Benz, PSA, Renault, and Jaguar Land Rover — with direct reporting to Finance EMEA and stakeholder management across EMEA, Asia, and the US.</p>
+      <p data-i18n="about-p3">In my current role at Lemco Precision, I led a <strong>complex ERP migration during a corporate ownership transition</strong> and maintained OTIF above 95% during a high-stakes plant transfer — supporting the EN 9100 certification upgrade and a team of four direct reports.</p>
+      <p data-i18n="about-p4">Outside of pure operations, I have developed real digital skills: Python for data processing and analysis, Power BI for reporting, and hands-on IoT/MDM system builds. I use AI tools actively in my daily workflow.</p>
     </div>
     <div class="info-cards">
       <div class="info-card">
@@ -487,55 +633,55 @@ footer strong { color: var(--ink); font-weight: 600; }
 <section class="section" id="portfolio">
   <div class="sec-head reveal">
     <span class="sec-tag">02</span>
-    <h2 class="sec-title">Portfolio</h2>
+    <h2 class="sec-title" data-i18n="sec-portfolio">Portfolio</h2>
     <div class="sec-line"></div>
   </div>
   <div class="projects">
 
     <div class="project wide reveal" id="project-capex">
       <div>
-        <div class="project-chip">CAPEX · Automation · EMEA</div>
-        <div class="project-title">€5M Automation Programme<br>TE Connectivity — HEMS</div>
-        <p class="project-desc">Led the full lifecycle of the Hybrid & Electric Mobility Solutions capital investment programme at the Bioggio site. Managed design, multi-supplier RFQ, and implementation of automated high-speed production lines, which led to 5–8× throughput and –30% cost via automation. Dual reporting to Finance EMEA and PM EMEA. Stakeholder interface across EMEA, Asia, and US — including direct contact with Jaguar Land Rover account management. All lines reached full capacity before the announced site closure.</p>
+        <div class="project-chip" data-i18n="p1-chip">CAPEX · Automation · EMEA</div>
+        <div class="project-title" data-i18n="p1-title">€5M Automation Programme<br>TE Connectivity — HEMS</div>
+        <p class="project-desc" data-i18n="p1-desc">Led the full lifecycle of the Hybrid &amp; Electric Mobility SolutionsCAPEX programme at the Bioggio site. Managed design, multi-supplier RFQ, and implementation of automated high-speed production lines, which led to 5–8× throughput and –30% cost via automation. Dual reporting to Finance EMEA and PM EMEA. Stakeholder interface across EMEA, Asia, and US. All lines reached full capacity before the site closure.</p>
         <div class="tags">
-          <span class="tag">CAPEX Management</span><span class="tag">Automotive OEM</span><span class="tag">Multi-supplier RFQ</span><span class="tag">EMEA Stakeholders</span><span class="tag">Finance Reporting</span>
+          <span class="tag" data-i18n="p1-tag1">CAPEX Management</span><span class="tag" data-i18n="p1-tag2">Automotive OEM</span><span class="tag" data-i18n="p1-tag3">Multi-supplier RFQ</span><span class="tag" data-i18n="p1-tag4">EMEA Stakeholders</span><span class="tag" data-i18n="p1-tag5">Finance Reporting</span>
         </div>
       </div>
       <div class="metrics">
-        <div class="metric-row"><span class="metric-key">Programme value</span><span class="metric-val">€5M</span></div>
-        <div class="metric-row"><span class="metric-key">Throughput gain</span><span class="metric-val">5–8×</span></div>
-        <div class="metric-row"><span class="metric-key">Cost reduction</span><span class="metric-val">–30%</span></div>
-        <div class="metric-row"><span class="metric-key">OEM clients</span><span class="metric-val">5</span></div>
-        <div class="metric-row"><span class="metric-key">Delivery</span><span class="metric-val sm green">On-time, pre-closure</span></div>
+        <div class="metric-row"><span class="metric-key" data-i18n="p1-mk1">Programme value</span><span class="metric-val">€5M</span></div>
+        <div class="metric-row"><span class="metric-key" data-i18n="p1-mk2">Throughput gain</span><span class="metric-val">5–8×</span></div>
+        <div class="metric-row"><span class="metric-key" data-i18n="p1-mk3">Cost reduction</span><span class="metric-val">–30%</span></div>
+        <div class="metric-row"><span class="metric-key" data-i18n="p1-mk4">OEM clients</span><span class="metric-val">5</span></div>
+        <div class="metric-row"><span class="metric-key" data-i18n="p1-mk5">Delivery</span><span class="metric-val sm green" data-i18n="p1-mv5">On-time, pre-closure</span></div>
       </div>
     </div>
 
     <div class="project reveal">
-      <div class="project-chip">ERP · Change Management</div>
-      <div class="project-title">SAP → LogyPlan ERP Migration</div>
-      <p class="project-desc">Led the full ERP migration at Lemco Precision during an active ownership transition. Scope: process redesign, master data migration, team training, go-live — in parallel with EN 9100 certification upgrade.</p>
+      <div class="project-chip" data-i18n="p2-chip">ERP · Change Management</div>
+      <div class="project-title" data-i18n="p2-title">SAP → LogyPlan ERP Migration</div>
+      <p class="project-desc" data-i18n="p2-desc">Led the full ERP migration at Lemco Precision during an active ownership transition. Scope: process redesign, master data migration, team training, go-live — in parallel supporting the EN 9100 certification upgrade.</p>
       <div class="metrics">
-        <div class="metric-row"><span class="metric-key">Parallel workstreams</span><span class="metric-val sm">ERP + EN 9100 + Transition</span></div>
+        <div class="metric-row"><span class="metric-key" data-i18n="p2-mk1">Parallel workstreams</span><span class="metric-val sm" data-i18n="p2-mv1">ERP + EN 9100 + Transition</span></div>
       </div>
-      <div class="tags"><span class="tag">SAP</span><span class="tag">LogyPlan</span><span class="tag">Process Redesign</span><span class="tag">EN 9100</span></div>
+      <div class="tags"><span class="tag">SAP</span><span class="tag">LogyPlan</span><span class="tag" data-i18n="p2-tag3">Process Redesign</span><span class="tag">EN 9100</span></div>
     </div>
 
     <div class="project reveal" id="project-crisis">
-      <div class="project-chip">Crisis Management · Leadership</div>
-      <div class="project-title">Business Continuity Through Ownership Transition</div>
-      <p class="project-desc">Steered the Bioggio site through a full closure announcement and acquisition. Rebuilt supply chain processes under the new ownership structure while maintaining uninterrupted delivery for aerospace and automotive customers.</p>
+      <div class="project-chip" data-i18n="p3-chip">Crisis Management · Leadership</div>
+      <div class="project-title" data-i18n="p3-title">Business Continuity Through Ownership Transition</div>
+      <p class="project-desc" data-i18n="p3-desc">Steered the Bioggio SC through a closure announcement and subsequent acquisition. Rebuilt supply chain processes under the new ownership structure while maintaining uninterrupted delivery for aerospace and automotive customers.</p>
       <div class="metrics">
-        <div class="metric-row"><span class="metric-key">OTIF maintained</span><span class="metric-val green">&gt;95%</span></div>
-        <div class="metric-row"><span class="metric-key">Critical disruptions</span><span class="metric-val">Zero</span></div>
+        <div class="metric-row"><span class="metric-key" data-i18n="p3-mk1">OTIF maintained</span><span class="metric-val green">&gt;95%</span></div>
+        <div class="metric-row"><span class="metric-key" data-i18n="p3-mk2">Critical disruptions</span><span class="metric-val" data-i18n="p3-mv2">Zero</span></div>
       </div>
-      <div class="tags"><span class="tag">Risk Management</span><span class="tag">Team Leadership</span><span class="tag">Aerospace</span></div>
+      <div class="tags"><span class="tag" data-i18n="p3-tag1">Risk Management</span><span class="tag" data-i18n="p3-tag2">Team Leadership</span><span class="tag" data-i18n="p3-tag3">Aerospace</span></div>
     </div>
 
     <div class="project reveal">
-      <div class="project-chip">Lean · BI · Continuous Improvement</div>
-      <div class="project-title">KPI Framework & Lean Transformation</div>
-      <p class="project-desc">Co-designed and deployed a site-wide KPI framework and performance monitoring dashboard (PIM) at TE Connectivity, combining VSM analysis with structured target-setting across production families.</p>
-      <div class="tags"><span class="tag">VSM</span><span class="tag">KPI Design</span><span class="tag">Power BI</span><span class="tag">Lean Six Sigma</span></div>
+      <div class="project-chip" data-i18n="p4-chip">Lean · BI · Continuous Improvement</div>
+      <div class="project-title" data-i18n="p4-title">KPI Framework &amp; Lean Transformation</div>
+      <p class="project-desc" data-i18n="p4-desc">Co-designed and deployed a site-wide KPI framework and performance monitoring dashboard (PIM) at TE Connectivity, combining VSM analysis with structured target-setting across production families.</p>
+      <div class="tags"><span class="tag" data-i18n="p4-tag1">VSM</span><span class="tag" data-i18n="p4-tag2">KPI Design</span><span class="tag" data-i18n="p4-tag3">Power BI</span><span class="tag" data-i18n="p4-tag4">Lean Six Sigma</span></div>
     </div>
 
   </div>
@@ -545,64 +691,67 @@ footer strong { color: var(--ink); font-weight: 600; }
 <section class="section" id="experience">
   <div class="sec-head reveal">
     <span class="sec-tag">03</span>
-    <h2 class="sec-title">Experience</h2>
+    <h2 class="sec-title" data-i18n="sec-experience">Expertise & Track Record</h2>
     <div class="sec-line"></div>
   </div>
   <div class="timeline">
 
     <div class="tl now reveal">
-      <div class="tl-date">Jan 2023 — Present</div>
-      <div class="tl-role">Supply Chain Manager</div>
-      <div class="tl-co">Lemco Precision SA · Bioggio, CH — formerly Carlisle Interconnect Technology</div>
-      <p class="tl-body">Appointed SCM through an ownership transition. Led a team of 4 across procurement, planning, logistics, and shipments — while simultaneously managing site reconfiguration, ERP migration, and EN 9100 upgrade.</p>
+      <div class="tl-date" data-i18n="exp1-date">Jan 2023 — Present</div>
+      <div class="tl-role" data-i18n="exp1-role">Supply Chain Manager</div>
+      <div class="tl-co" data-i18n="exp1-co">Lemco Precision SA · Bioggio, CH — formerly Carlisle Interconnect Technology</div>
+      <p class="tl-body" data-i18n="exp1-body">Hired as Supply Chain Manager to lead end-to-end operations and a team of 4. Shortly after joining, navigated the site through a closure announcement and subsequent acquisition — while simultaneously driving ERP migration, site reconfiguration, and supporting the EN 9100 upgrade.</p>
       <ul class="tl-list">
-        <li><strong>&gt;95% OTIF</strong> maintained throughout plant transfer and capacity reduction</li>
-        <li><strong>ERP migration SAP → LogyPlan</strong> led end-to-end: process redesign, training, go-live</li>
-        <li><strong>Zero critical disruptions</strong> during full ownership change</li>
-        <li><strong>EN 9100 upgrade</strong> delivered within transition timeline</li>
+        <li data-i18n="exp1-li1"><strong>&gt;95% OTIF</strong> maintained throughout plant transfer and capacity reduction</li>
+        <li data-i18n="exp1-li2"><strong>ERP migration SAP → LogyPlan</strong> led end-to-end: process redesign, training, go-live</li>
+        <li data-i18n="exp1-li3"><strong>Zero critical disruptions</strong> during full ownership change</li>
+        <li data-i18n="exp1-li4"><strong>Supported EN 9100 upgrade</strong></li>
+        <li data-i18n="exp1-li5"><strong>Cross-functional risk mitigation</strong> — creative solutions to minimise supply and production risks throughout transition</li>
       </ul>
     </div>
 
     <div class="tl reveal">
-      <div class="tl-date">Oct 2019 — Dec 2022</div>
-      <div class="tl-role">Junior Project Manager — HEMS Product Line</div>
-      <div class="tl-co">TE Connectivity Solution GmbH · Bioggio, CH</div>
-      <p class="tl-body">Led the Hybrid & Electric Mobility Solutions capital programme. Dual reporting to Finance EMEA and PM EMEA. OEM customers: Volkswagen Group, Mercedes-Benz, PSA, Renault, Jaguar Land Rover.</p>
+      <div class="tl-date" data-i18n="exp2-date">Oct 2019 — Dec 2022</div>
+      <div class="tl-role" data-i18n="exp2-role">Junior Project Manager — HEMS Product Line</div>
+      <div class="tl-co" data-i18n="exp2-co">TE Connectivity Solution GmbH · Bioggio, CH</div>
+      <p class="tl-body" data-i18n="exp2-body">Led the Hybrid &amp; Electric Mobility Solutions CAPEX. Dual reporting to Finance EMEA and PM EMEA. OEM customers: Volkswagen Group, Mercedes-Benz, PSA, Renault, Jaguar Land Rover.</p>
       <ul class="tl-list">
-        <li><strong>€5M CAPEX</strong> — full lifecycle from RFQ through ramp-up and site transfer</li>
-        <li><strong>5–8× throughput</strong> and –30% cost via automation</li>
-        <li>All lines operational before closure, smooth transfer secured</li>
+        <li data-i18n="exp2-li1"><strong>€5M CAPEX</strong> — full lifecycle from RFQ through ramp-up and site transfer</li>
+        <li data-i18n="exp2-li2"><strong>5–8× throughput</strong> and –30% cost via automation</li>
+        <li data-i18n="exp2-li3">All lines operational before closure, smooth transfer secured</li>
+        <li data-i18n="exp2-li4"><strong>International stakeholder management</strong> — regular interface with Finance EMEA, PM EMEA, and OEM account managers</li>
       </ul>
     </div>
 
     <div class="tl reveal">
-      <div class="tl-date">Oct 2018 — Oct 2019</div>
-      <div class="tl-role">Continuous Improvement Analyst</div>
-      <div class="tl-co">TE Connectivity Solution GmbH · Bioggio, CH</div>
+      <div class="tl-date" data-i18n="exp3-date">Oct 2018 — Oct 2019</div>
+      <div class="tl-role" data-i18n="exp3-role">Continuous Improvement Analyst</div>
+      <div class="tl-co" data-i18n="exp3-co">TE Connectivity Solution GmbH · Bioggio, CH</div>
       <ul class="tl-list">
-        <li>VSM-based lean transformation and production family segmentation</li>
-        <li>KPI framework co-designed and deployed site-wide</li>
-        <li>Performance monitoring dashboard (PIM) co-developed</li>
+        <li data-i18n="exp3-li1">VSM-based lean transformation and production family segmentation</li>
+        <li data-i18n="exp3-li2">KPI framework co-designed and deployed site-wide</li>
+        <li data-i18n="exp3-li3">Performance monitoring dashboard (PIM) co-developed</li>
       </ul>
     </div>
 
     <div class="tl reveal">
-      <div class="tl-date">Mar 2017 — Sep 2018</div>
-      <div class="tl-role">Strategic Source Analyst & Planner</div>
-      <div class="tl-co">TE Connectivity Solution GmbH · Bioggio, CH</div>
+      <div class="tl-date" data-i18n="exp4-date">Mar 2017 — Sep 2018</div>
+      <div class="tl-role" data-i18n="exp4-role">Strategic Source Analyst &amp; Planner</div>
+      <div class="tl-co" data-i18n="exp4-co">TE Connectivity Solution GmbH · Bioggio, CH</div>
       <ul class="tl-list">
-        <li>Production planning, procurement, and subcontracting via SAP across multiple product lines</li>
-        <li>Metal alloy availability and supplier alignment management</li>
+        <li data-i18n="exp4-li1">Production planning, procurement, and subcontracting <strong>via SAP across multiple product lines</strong></li>
+        <li data-i18n="exp4-li2">Metal alloy availability and supplier alignment management</li>
+        <li data-i18n="exp4-li3"><strong>Subcontracting management</strong> — balancing internal and external capacity to meet delivery commitments</li>
       </ul>
     </div>
 
     <div class="tl reveal">
-      <div class="tl-date">Apr 2015 — Feb 2017</div>
-      <div class="tl-role">Accounting Support & TEOA Technician</div>
-      <div class="tl-co">TE Connectivity Solution GmbH · Bioggio, CH</div>
+      <div class="tl-date" data-i18n="exp5-date">Apr 2015 — Feb 2017</div>
+      <div class="tl-role" data-i18n="exp5-role">Accounting Support &amp; TEOA Technician</div>
+      <div class="tl-co" data-i18n="exp5-co">TE Connectivity Solution GmbH · Bioggio, CH</div>
       <ul class="tl-list">
-        <li>Cost, budgeting and demand variability dashboards</li>
-        <li>BSc thesis on Value Stream Mapping; initial CI initiatives</li>
+        <li data-i18n="exp5-li1">Cost, budgeting and demand variability dashboards</li>
+        <li data-i18n="exp5-li2">BSc thesis on Value Stream Mapping; initial CI initiatives</li>
       </ul>
     </div>
 
@@ -613,79 +762,79 @@ footer strong { color: var(--ink); font-weight: 600; }
 <section class="section" id="skills">
   <div class="sec-head reveal">
     <span class="sec-tag">04</span>
-    <h2 class="sec-title">Skills</h2>
+    <h2 class="sec-title" data-i18n="sec-skills">Skills</h2>
     <div class="sec-line"></div>
   </div>
 
   <div class="skills-grid reveal">
     <div class="skill-card">
-      <div class="skill-card-title">ERP & Systems</div>
+      <div class="skill-card-title" data-i18n="sk-erp-title">ERP &amp; Systems</div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">SAP ERP</span><span class="skill-lvl">Advanced</span></div>
+        <div class="skill-top"><span class="skill-name">SAP ERP</span><span class="skill-lvl" data-i18n="sk-lvl-adv1">Advanced</span></div>
         <div class="bar"><div class="bar-fill" data-width="82"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">LogyPlan ERP</span><span class="skill-lvl">Advanced</span></div>
+        <div class="skill-top"><span class="skill-name">LogyPlan ERP</span><span class="skill-lvl" data-i18n="sk-lvl-adv2">Advanced</span></div>
         <div class="bar"><div class="bar-fill" data-width="80"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">Hydra MES</span><span class="skill-lvl">Proficient</span></div>
+        <div class="skill-top"><span class="skill-name">Hydra MES</span><span class="skill-lvl" data-i18n="sk-lvl-prof1">Proficient</span></div>
         <div class="bar"><div class="bar-fill" data-width="65"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">FileMaker</span><span class="skill-lvl">Proficient</span></div>
+        <div class="skill-top"><span class="skill-name">FileMaker</span><span class="skill-lvl" data-i18n="sk-lvl-prof2">Proficient</span></div>
         <div class="bar"><div class="bar-fill" data-width="65"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">Arena Simulation</span><span class="skill-lvl">Base</span></div>
-        <div class="bar"><div class="bar-fill" data-width="45"></div></div>
+        <div class="skill-top"><span class="skill-name">Arena Simulation</span><span class="skill-lvl" data-i18n="sk-lvl-prof1">Proficient</span></div>
+        <div class="bar"><div class="bar-fill" data-width="65"></div></div>
       </div>
     </div>
 
     <div class="skill-card">
-      <div class="skill-card-title">Analytics & Digital</div>
+      <div class="skill-card-title" data-i18n="sk-ana-title">Analytics &amp; Digital</div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">Microsoft Excel</span><span class="skill-lvl">Expert</span></div>
+        <div class="skill-top"><span class="skill-name">Microsoft Excel</span><span class="skill-lvl" data-i18n="sk-lvl-expert">Expert</span></div>
         <div class="bar"><div class="bar-fill" data-width="95"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">Power BI</span><span class="skill-lvl">Advanced</span></div>
+        <div class="skill-top"><span class="skill-name">Power BI</span><span class="skill-lvl" data-i18n="sk-lvl-adv3">Advanced</span></div>
         <div class="bar"><div class="bar-fill" data-width="78"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">Python</span><span class="skill-lvl">Applied</span></div>
+        <div class="skill-top"><span class="skill-name">Python</span><span class="skill-lvl" data-i18n="sk-lvl-app1">Applied</span></div>
         <div class="bar"><div class="bar-fill sky" data-width="60"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">SQL / HTML</span><span class="skill-lvl">Applied</span></div>
+        <div class="skill-top"><span class="skill-name">SQL / HTML</span><span class="skill-lvl" data-i18n="sk-lvl-app2">Applied</span></div>
         <div class="bar"><div class="bar-fill sky" data-width="55"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">MS Project / Visio</span><span class="skill-lvl">Advanced</span></div>
+        <div class="skill-top"><span class="skill-name">MS Project / Visio</span><span class="skill-lvl" data-i18n="sk-lvl-adv4">Advanced</span></div>
         <div class="bar"><div class="bar-fill" data-width="78"></div></div>
       </div>
     </div>
 
     <div class="skill-card">
-      <div class="skill-card-title">Methodologies & Ops</div>
+      <div class="skill-card-title" data-i18n="sk-meth-title">Methodologies &amp; Ops</div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">CAPEX Project Mgmt</span><span class="skill-lvl">Applied</span></div>
+        <div class="skill-top"><span class="skill-name" data-i18n="sk-capex-name">CAPEX Project Mgmt</span><span class="skill-lvl" data-i18n="sk-lvl-app3">Applied</span></div>
         <div class="bar"><div class="bar-fill green" data-width="88"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">Risk & Continuity</span><span class="skill-lvl">Applied</span></div>
+        <div class="skill-top"><span class="skill-name" data-i18n="sk-risk-name">Risk &amp; Continuity</span><span class="skill-lvl" data-i18n="sk-lvl-app4">Applied</span></div>
         <div class="bar"><div class="bar-fill green" data-width="85"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">Lean / VSM</span><span class="skill-lvl">Applied</span></div>
+        <div class="skill-top"><span class="skill-name">Lean / VSM</span><span class="skill-lvl" data-i18n="sk-lvl-app5">Applied</span></div>
         <div class="bar"><div class="bar-fill green" data-width="82"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">EN 9100</span><span class="skill-lvl">Applied</span></div>
+        <div class="skill-top"><span class="skill-name">EN 9100 / EN</span><span class="skill-lvl" data-i18n="sk-lvl-app6">Applied</span></div>
         <div class="bar"><div class="bar-fill green" data-width="72"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">IoT / MDM / Kiosk</span><span class="skill-lvl">Applied</span></div>
+        <div class="skill-top"><span class="skill-name">IoT / MDM / Kiosk</span><span class="skill-lvl" data-i18n="sk-lvl-app7">Applied</span></div>
         <div class="bar"><div class="bar-fill sky" data-width="55"></div></div>
       </div>
     </div>
@@ -693,17 +842,31 @@ footer strong { color: var(--ink); font-weight: 600; }
 
   <div class="lang-grid reveal">
     <div class="skill-card">
-      <div class="skill-card-title">Italian</div>
+      <div class="skill-card-title" data-i18n="sk-it-title">Italian</div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">Native speaker</span><span class="skill-lvl">C2</span></div>
+        <div class="skill-top"><span class="skill-name" data-i18n="sk-it-name">Native speaker</span><span class="skill-lvl">C2</span></div>
         <div class="bar"><div class="bar-fill" data-width="100"></div></div>
       </div>
     </div>
     <div class="skill-card">
-      <div class="skill-card-title">English</div>
+      <div class="skill-card-title" data-i18n="sk-en-title">English</div>
       <div class="skill-item">
-        <div class="skill-top"><span class="skill-name">Operational — EMEA / Asia / US</span><span class="skill-lvl">B2</span></div>
+        <div class="skill-top"><span class="skill-name" data-i18n="sk-en-name">Operational — EMEA / Asia / US</span><span class="skill-lvl">B2</span></div>
         <div class="bar"><div class="bar-fill sky" data-width="72"></div></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title" data-i18n="sk-de-title">German</div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name" data-i18n="sk-de-name">Passive</span><span class="skill-lvl">A2</span></div>
+        <div class="bar"><div class="bar-fill sky" data-width="30"></div></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title" data-i18n="sk-fr-title">French</div>
+      <div class="skill-item">
+        <div class="skill-top"><span class="skill-name" data-i18n="sk-fr-name">Good reading & listening</span><span class="skill-lvl">A2–B1</span></div>
+        <div class="bar"><div class="bar-fill sky" data-width="35"></div></div>
       </div>
     </div>
   </div>
@@ -713,21 +876,21 @@ footer strong { color: var(--ink); font-weight: 600; }
 <section class="section" id="education">
   <div class="sec-head reveal">
     <span class="sec-tag">05</span>
-    <h2 class="sec-title">Education & Certifications</h2>
+    <h2 class="sec-title" data-i18n="sec-education">Education &amp; Certifications</h2>
     <div class="sec-line"></div>
   </div>
   <div class="edu-grid reveal">
     <div class="edu-card">
-      <div class="edu-degree">MSc Engineering — Business & Production</div>
+      <div class="edu-degree" data-i18n="edu1-degree">MSc Engineering — Business &amp; Production</div>
       <div class="edu-school">SUPSI, Bioggio (CH)</div>
-      <div class="edu-period">2015 – 2018 · Final Grade: A</div>
-      <div class="edu-note">Operations management, production systems, supply chain strategy. Research integrated with practice at TE Connectivity.</div>
+      <div class="edu-period" data-i18n="edu1-period">2015 – 2018 · Final Grade: A</div>
+      <div class="edu-note" data-i18n="edu1-note">Operations management, production systems, supply chain strategy. Research integrated with practice at TE Connectivity.</div>
     </div>
     <div class="edu-card">
-      <div class="edu-degree">BSc Management Engineering</div>
-      <div class="edu-school">SUPSI, Bioggio (CH) · Erasmus: University of Luzern</div>
-      <div class="edu-period">2012 – 2015 · Final Grade: 6/6</div>
-      <div class="edu-note">Industrial engineering with an international semester at Luzern. Thesis on VSM at TE Connectivity Bioggio.</div>
+      <div class="edu-degree" data-i18n="edu2-degree">BSc Management Engineering</div>
+      <div class="edu-school" data-i18n="edu2-school">SUPSI, Bioggio (CH) · Erasmus: University of Luzern</div>
+      <div class="edu-period" data-i18n="edu2-period">2012 – 2015 · Final Grade: 6/6</div>
+      <div class="edu-note" data-i18n="edu2-note">Industrial engineering with an international semester at Luzern. Thesis on VSM at TE Connectivity Bioggio.</div>
     </div>
   </div>
   <div class="cert-list reveal">
@@ -741,21 +904,21 @@ footer strong { color: var(--ink); font-weight: 600; }
 <section class="section" id="contact">
   <div class="sec-head reveal">
     <span class="sec-tag">06</span>
-    <h2 class="sec-title">Contact</h2>
+    <h2 class="sec-title" data-i18n="sec-contact">Contact</h2>
     <div class="sec-line"></div>
   </div>
   <div class="contact-wrap reveal">
     <div>
-      <div class="contact-heading">Open to new<br><span>opportunities</span>.</div>
-      <a href="mailto:andrea.volpe.1993a@gmail.com" class="btn btn-primary">Send an Email</a>
+      <div class="contact-heading" data-i18n="contact-heading">Open to new<br><span>opportunities.</span></div>
+      <a href="mailto:andrea.volpe.1993a@gmail.com" class="btn btn-primary" data-i18n="contact-btn">Send an Email</a>
     </div>
     <div class="contact-cells">
       <div class="contact-cell">
-        <div class="contact-cell-label">Phone</div>
+        <div class="contact-cell-label" data-i18n="contact-phone-label">Phone</div>
         <div class="contact-cell-val">+39 333 101 32 33</div>
       </div>
       <div class="contact-cell">
-        <div class="contact-cell-label">Location</div>
+        <div class="contact-cell-label" data-i18n="contact-loc-label">Location</div>
         <div class="contact-cell-val">Venegono Superiore (VA)</div>
       </div>
       <div class="contact-cell" style="grid-column: 1/-1">
@@ -771,11 +934,219 @@ footer strong { color: var(--ink); font-weight: 600; }
 </section>
 
 <footer>
-  <p><strong>Andrea Volpe</strong> · Supply Chain & Operations Manager</p>
+  <p data-i18n="footer-text"><strong>Andrea Volpe</strong> · Supply Chain &amp; Operations Manager</p>
   <p>Ticino, CH · © 2025</p>
 </footer>
 
+<!-- FLOATING TOGGLES -->
+<div class="floating-toggles">
+  <button class="toggle-btn lang-toggle" id="langToggle" aria-label="Switch language">
+    <span id="lang-en" class="active">EN</span>
+    <span id="lang-it">IT</span>
+  </button>
+  <button class="toggle-btn" id="themeToggle" aria-label="Toggle dark mode">☀️</button>
+</div>
+
 <script>
+/* ── TRANSLATIONS ────────────────────────────────────────── */
+const T = {
+en: {
+'nav-about':'About','nav-portfolio':'Portfolio','nav-experience':'Expertise','nav-skills':'Skills','nav-education':'Education','nav-contact':'Contact',
+'hero-chip':'Supply Chain · Operations · Management',
+'hero-sub':'Supply Chain & Operations Manager · MSc SUPSI · Ticino',
+'hero-desc':'Nine years of hands-on experience in multinational precision manufacturing — working with stakeholders across EMEA, Asia, and the US, and navigating an ownership transition along the way.<br><br>My day-to-day sits at the intersection of <strong>technical data and human processes</strong>. I use Excel, Power BI, and Python to turn numbers into decisions, and I design workflows that genuinely support the people who rely on them every day — always trying to keep a clear head when operations get hectic.',
+'hero-cta1':'View Portfolio','hero-cta2':'Get in Touch',
+'stat-years':'Years experience','stat-capex':'CAPEX managed','stat-otif':'OTIF during crisis','stat-throughput':'Throughput gain','stat-cost':'Cost reduction','stat-oem':'Tier-1 OEM clients',
+'sec-about':'About',
+'about-p1':'I specialise in Supply Chain and Operations — the point where strategic planning meets the often unpredictable reality of the shop floor. With a foundation in precision manufacturing for automotive and aerospace, I have built my career in environments where precision is a baseline requirement, not an aspiration.',
+'about-p2':'Over nine years I have grown professionally from continuous improvement and procurement to leading end-to-end supply chain operations. My track record includes managing a <strong>€5M automation programme</strong> at TE Connectivity — serving Volkswagen Group, Mercedes-Benz, PSA, Renault, and Jaguar Land Rover — with direct reporting to Finance EMEA and stakeholder management across EMEA, Asia, and the US.',
+'about-p3':'In my current role at Lemco Precision, I led a <strong>complex ERP migration during a corporate ownership transition</strong> and maintained OTIF above 95% during a high-stakes plant transfer — supporting the EN 9100 certification upgrade and a team of four direct reports.',
+'about-p4':'Outside of pure operations, I have developed real digital skills: Python for data processing and analysis, Power BI for reporting, and hands-on IoT/MDM system builds. I use AI tools actively in my daily workflow.',
+'info-location-label':'Location','info-location-val':'Venegono Superiore (VA), Italy',
+'info-edu-label':'Education','info-edu-val':'MSc Engineering (Business & Production)<br>SUPSI, Bioggio — Grade A<br><br>BSc Management Engineering<br>SUPSI · Erasmus Luzern — Grade 6/6',
+'info-lang-label':'Languages','info-lang-val':'Italian — Native · English B2 (operational EMEA/Asia/US)<br>German A2 · French reading',
+'sec-portfolio':'Portfolio',
+'p1-chip':'CAPEX · Automation · EMEA','p1-title':'€5M Automation Programme<br>TE Connectivity — HEMS',
+'p1-desc':'Led the full lifecycle of the Hybrid & Electric Mobility Solutions CAPEX programme at the Bioggio site. Managed design, multi-supplier RFQ, and implementation of automated high-speed production lines, which led to 5–8× throughput and –30% cost via automation. Dual reporting to Finance EMEA and PM EMEA. Stakeholder interface across EMEA, Asia, and US. All lines reached full capacity before the site closure.',
+'p1-tag1':'CAPEX Management','p1-tag2':'Automotive OEM','p1-tag3':'Multi-supplier RFQ','p1-tag4':'EMEA Stakeholders','p1-tag5':'Finance Reporting',
+'p1-mk1':'Programme value','p1-mk2':'Throughput gain','p1-mk3':'Cost reduction','p1-mk4':'OEM clients','p1-mk5':'Delivery','p1-mv5':'On-time, pre-closure',
+'p2-chip':'ERP · Change Management','p2-title':'SAP → LogyPlan ERP Migration',
+'p2-desc':'Led the full ERP migration at Lemco Precision during an active ownership transition. Scope: process redesign, master data migration, team training, go-live — in parallel supporting the EN 9100 certification upgrade.',
+'p2-mk1':'Parallel workstreams','p2-mv1':'ERP + EN 9100 + Transition','p2-tag3':'Process Redesign',
+'p3-chip':'Crisis Management · Leadership','p3-title':'Business Continuity Through Ownership Transition',
+'p3-desc':'Steered the Bioggio SC through a closure announcement and subsequent acquisition. Rebuilt supply chain processes under the new ownership structure while maintaining uninterrupted delivery for aerospace and automotive customers.',
+'p3-mk1':'OTIF maintained','p3-mk2':'Critical disruptions','p3-mv2':'Zero','p3-tag1':'Risk Management','p3-tag2':'Team Leadership','p3-tag3':'Aerospace',
+'p4-chip':'Lean · BI · Continuous Improvement','p4-title':'KPI Framework & Lean Transformation',
+'p4-desc':'Co-designed and deployed a site-wide KPI framework and performance monitoring dashboard (PIM) at TE Connectivity, combining VSM analysis with structured target-setting across production families.',
+'p4-tag2':'KPI Design',
+'sec-experience':'Expertise & Track Record',
+'exp1-date':'Jan 2023 — Present','exp1-body':'Hired as Supply Chain Manager to lead end-to-end operations and a team of 4. Shortly after joining, navigated the site through a closure announcement and subsequent acquisition — while simultaneously driving ERP migration, site reconfiguration, and EN 9100 upgrade.',
+'exp1-li1':'<strong>>95% OTIF</strong> maintained throughout plant transfer and capacity reduction',
+'exp1-li2':'<strong>ERP migration SAP → LogyPlan</strong> led end-to-end: process redesign, training, go-live',
+'exp1-li3':'<strong>Zero critical disruptions</strong> during full ownership change',
+'exp1-li4':'<strong>Supported EN 9100 upgrade</strong>',
+'exp1-li5':'<strong>Cross-functional risk mitigation</strong> — creative solutions to minimise supply and production risks throughout transition',
+'exp2-date':'Oct 2019 — Dec 2022','exp2-body':'Led the Hybrid & Electric Mobility Solutions CAPEX. Dual reporting to Finance EMEA and PM EMEA. OEM customers: Volkswagen Group, Mercedes-Benz, PSA, Renault, Jaguar Land Rover.',
+'exp2-li1':'<strong>€5M CAPEX</strong> — full lifecycle from RFQ through ramp-up and site transfer',
+'exp2-li2':'<strong>5–8× throughput</strong> and –30% cost via automation',
+'exp2-li3':'All lines operational before closure, smooth transfer secured',
+'exp2-li4':'<strong>International stakeholder management</strong> — regular interface with Finance EMEA, PM EMEA, and OEM account managers',
+'exp3-date':'Oct 2018 — Oct 2019',
+'exp3-li1':'VSM-based lean transformation and production family segmentation',
+'exp3-li2':'KPI framework co-designed and deployed site-wide',
+'exp3-li3':'Performance monitoring dashboard (PIM) co-developed',
+'exp4-date':'Mar 2017 — Sep 2018',
+'exp4-li1':'Production planning, procurement, and subcontracting <strong>via SAP across multiple product lines</strong>',
+'exp4-li2':'Metal alloy availability and supplier alignment management',
+'exp4-li3':'<strong>Subcontracting management</strong> — balancing internal and external capacity to meet delivery commitments',
+'exp5-date':'Apr 2015 — Feb 2017',
+'exp5-li1':'Cost, budgeting and demand variability dashboards',
+'exp5-li2':'BSc thesis on Value Stream Mapping; initial CI initiatives',
+'sec-skills':'Skills',
+'sk-erp-title':'ERP & Systems','sk-ana-title':'Analytics & Digital','sk-meth-title':'Methodologies & Ops',
+'sk-lvl-expert':'Expert','sk-lvl-adv1':'Advanced','sk-lvl-adv2':'Advanced','sk-lvl-adv3':'Advanced','sk-lvl-adv4':'Advanced',
+'sk-lvl-prof1':'Proficient','sk-lvl-prof2':'Proficient','sk-lvl-base':'Base',
+'sk-lvl-app1':'Applied','sk-lvl-app2':'Applied','sk-lvl-app3':'Applied','sk-lvl-app4':'Applied','sk-lvl-app5':'Applied','sk-lvl-app6':'Applied','sk-lvl-app7':'Applied',
+'sk-capex-name':'CAPEX Project Mgmt','sk-risk-name':'Risk & Continuity',
+'sk-it-title':'Italian','sk-it-name':'Native speaker','sk-en-title':'English','sk-en-name':'Operational — EMEA / Asia / US',
+'sk-de-title':'German','sk-de-name':'Passive','sk-fr-title':'French','sk-fr-name':'Good reading & listening',
+'sec-education':'Education & Certifications',
+'edu1-degree':'MSc Engineering — Business & Production','edu1-period':'2015 – 2018 · Final Grade: A',
+'edu1-note':'Operations management, production systems, supply chain strategy. Research integrated with practice at TE Connectivity.',
+'edu2-degree':'BSc Management Engineering','edu2-school':'SUPSI, Bioggio (CH) · Erasmus: University of Luzern','edu2-period':'2012 – 2015 · Final Grade: 6/6',
+'edu2-note':'Industrial engineering with an international semester at Luzern. Thesis on VSM at TE Connectivity Bioggio.',
+'sec-contact':'Contact',
+'contact-heading':'Open to new<br><span>opportunities.</span>',
+'contact-btn':'Send an Email','contact-phone-label':'Phone','contact-loc-label':'Location',
+'footer-text':'<strong>Andrea Volpe</strong> · Supply Chain & Operations Manager'
+},
+it: {
+'nav-about':'Chi Sono','nav-portfolio':'Portfolio','nav-experience':'Competenze','nav-skills':'Skills','nav-education':'Formazione','nav-contact':'Contatti',
+'hero-chip':'Supply Chain · Operations · Manager',
+'hero-sub':'Supply Chain & Operations Manager · MSc SUPSI · Ticino',
+'hero-desc':'Nove anni di esperienza nel settore della meccanica di precisione in ambito internazionale — collaborando con stakeholder in EMEA, Asia e Stati Uniti, e attraversando una transizione proprietaria nel percorso.<br><br>Il mio lavoro quotidiano si colloca all\'intersezione tra <strong>dati tecnici e processi umani</strong>. Utilizzo Excel, Power BI e Python per trasformare i numeri in decisioni, e progetto flussi di lavoro che supportano concretamente le persone che li utilizzano ogni giorno — cercando sempre di mantenere lucidità quando le operations si fanno complesse.',
+'hero-cta1':'Vedi Portfolio','hero-cta2':'Contattami',
+'stat-years':'Anni di esperienza','stat-capex':'CAPEX gestiti','stat-otif':'OTIF durante la crisi','stat-throughput':'Incremento throughput','stat-cost':'Riduzione costi','stat-oem':'Clienti OEM Tier-1',
+'sec-about':'Chi Sono',
+'about-p1':'Sono specializzato in Supply Chain e Operations — il punto critico in cui la pianificazione strategica si confronta con la realtà, spesso imprevedibile, del reparto produttivo. Con una formazione nella meccanica di precisione per il settore automotive e aerospaziale, ho costruito la mia carriera in ambienti dove la precisione è un requisito fondamentale.',
+'about-p2':'In oltre nove anni sono cresciuto professionalmente partendo dal continuous improvement, passando per il procurement fino alla gestione di operations supply chain end-to-end. Il mio percorso include la gestione di un <strong>programma di automazione da €5M</strong> presso TE Connectivity — collaborando con OEM quali Volkswagen Group, Mercedes-Benz, PSA, Renault e Jaguar Land Rover — con reporting diretto a Finance EMEA e gestione degli stakeholder in EMEA, Asia e Stati Uniti.',
+'about-p3':'Nel mio ruolo attuale presso Lemco Precision, ho guidato una <strong>complessa migrazione ERP nel corso di una transizione societaria</strong>, mantenendo l\'OTIF oltre il 95% durante il trasferimento delle attività — supportando attivamente l\'upgrade della certificazione EN 9100 e un team di quattro riporti diretti.',
+'about-p4':'Al di là delle pure operations, ho sviluppato competenze digitali concrete: Python per l\'elaborazione e l\'analisi dei dati, Power BI per il reporting, e la realizzazione pratica di sistemi IoT/MDM. Utilizzo attivamente strumenti di AI nel mio flusso di lavoro quotidiano.',
+'info-location-label':'Sede','info-location-val':'Venegono Superiore (VA), Italia',
+'info-edu-label':'Formazione','info-edu-val':'MSc Ingegneria (Business & Produzione)<br>SUPSI, Bioggio — Voto A<br><br>BSc Ingegneria Gestionale<br>SUPSI · Erasmus Lucerna — Voto 6/6',
+'info-lang-label':'Lingue','info-lang-val':'Italiano — Madrelingua · Inglese B2 (operativo EMEA/Asia/USA)<br>Tedesco A2 · Francese comprensione scritta e orale',
+'sec-portfolio':'Portfolio',
+'p1-chip':'CAPEX · Automazione · EMEA','p1-title':'Programma di Automazione €5M<br>TE Connectivity — HEMS',
+'p1-desc':'Ho guidato l\'intero ciclo di vita del progetto Hybrid & Electric Mobility Solutions presso il sito di Bioggio. Ho supervisionato progettazione, RFQ multi-fornitore e implementazione di linee di produzione automatizzate ad alta velocità, ottenendo un incremento del throughput di 5–8× e una riduzione dei costi del 30% tramite automazione. Doppio reporting a Finance EMEA e PM EMEA. Interfaccia con gli stakeholder in EMEA, Asia e Stati Uniti. Tutte le linee hanno raggiunto la piena capacità prima della chiusura del sito.',
+'p1-tag1':'Gestione CAPEX','p1-tag2':'OEM Automotive','p1-tag3':'RFQ Multi-fornitore','p1-tag4':'Stakeholder EMEA','p1-tag5':'Reporting Finanziario',
+'p1-mk1':'Valore programma','p1-mk2':'Incremento throughput','p1-mk3':'Riduzione costi','p1-mk4':'Clienti OEM','p1-mk5':'Consegna','p1-mv5':'Nei tempi, pre-chiusura',
+'p2-chip':'ERP · Change Management','p2-title':'Migrazione ERP SAP → LogyPlan',
+'p2-desc':'Ho guidato l\'intera migrazione ERP presso Lemco Precision durante una transizione proprietaria. Ambito: ridisegnazione dei processi, migrazione dei master data, formazione del team, go-live — supportando in parallelo l\'upgrade della certificazione EN 9100.',
+'p2-mk1':'Workstream paralleli','p2-mv1':'ERP + EN 9100 + Transizione','p2-tag3':'Ridisegnazione Processi',
+'p3-chip':'Gestione Crisi · Leadership','p3-title':'Continuità Operativa Durante la Transizione Proprietaria',
+'p3-desc':'Ho guidato la SC del sito di Bioggio attraverso l\'annuncio di chiusura e la successiva acquisizione, ricostruendo i processi supply chain nella nuova struttura proprietaria e mantenendo consegne ininterrotte per i clienti aerospace e automotive.',
+'p3-mk1':'OTIF mantenuto','p3-mk2':'Interruzioni critiche','p3-mv2':'Zero','p3-tag1':'Gestione del Rischio','p3-tag2':'Leadership di Team','p3-tag3':'Aerospaziale',
+'p4-chip':'Lean · BI · Miglioramento Continuo','p4-title':'Framework KPI e Trasformazione Lean',
+'p4-desc':'Co-progettato e implementato un framework KPI a livello di sito e una dashboard di monitoraggio delle performance (PIM) presso TE Connectivity, combinando analisi VSM con la definizione strutturata di obiettivi sulle famiglie produttive.',
+'p4-tag2':'Progettazione KPI',
+'sec-experience':'Competenze & Percorso',
+'exp1-date':'Gen 2023 — Presente','exp1-body':'Assunto come Supply Chain Manager per guidare le operations end-to-end e un team di 4 persone. Poco dopo l\'ingresso in azienda, ho gestito la SC del sito attraverso l\'annuncio di chiusura e la successiva acquisizione — portando avanti in parallelo la migrazione ERP, la riconfigurazione del sito e supportando l\'upgrade EN 9100.',
+'exp1-li1':'<strong>>95% OTIF</strong> mantenuto durante il trasferimento delle attività e la conseguente riduzione della capacità',
+'exp1-li2':'<strong>Migrazione ERP SAP → LogyPlan</strong> end-to-end: ridisegnazione processi, formazione, go-live',
+'exp1-li3':'<strong>Zero interruzioni critiche</strong> durante l\'intero cambio di proprietà',
+'exp1-li4':'<strong>Supportato Upgrade EN 9100</strong>',
+'exp1-li5':'<strong>Mitigazione del rischio interfunzionale</strong> — soluzioni creative per minimizzare i rischi di fornitura e produzione durante la transizione',
+'exp2-date':'Ott 2019 — Dic 2022','exp2-body':'Ho guidato il progetto Hybrid & Electric Mobility Solutions. Doppio reporting a Finance EMEA e PM EMEA. Clienti OEM: Volkswagen Group, Mercedes-Benz, PSA, Renault, Jaguar Land Rover.',
+'exp2-li1':'<strong>€5M CAPEX</strong> — ciclo di vita completo dalla RFQ al ramp-up e trasferimento delle attività',
+'exp2-li2':'<strong>Throughput 5–8×</strong> e –30% costi tramite automazione',
+'exp2-li3':'<strong>Tutte le linee operative prima della chiusura, trasferimento regolare assicurato</strong>',
+'exp2-li4':'<strong>Gestione internazionale degli stakeholder</strong> — interfaccia regolare con Finance EMEA, PM EMEA e account manager OEM',
+'exp3-date':'Ott 2018 — Ott 2019',
+'exp3-li1':'Trasformazione lean basata su VSM e segmentazione per famiglie produttive',
+'exp3-li2':'Framework KPI co-progettato e implementato a livello di sito',
+'exp3-li3':'Dashboard di monitoraggio delle performance (PIM) co-sviluppata',
+'exp4-date':'Mar 2017 — Set 2018',
+'exp4-li1':'Pianificazione della produzione, procurement e sub-contracting <strong>tramite SAP su più linee di prodotto</strong>',
+'exp4-li2':'Gestione della disponibilità delle leghe metalliche e allineamento fornitori',
+'exp4-li3':'<strong>Gestione sub-contracting</strong> — bilanciamento della capacità interna ed esterna per rispettare gli impegni di consegna',
+'exp5-date':'Apr 2015 — Feb 2017',
+'exp5-li1':'Dashboard per costi, budgeting e variabilità della domanda',
+'exp5-li2':'Tesi BSc su Value Stream Mapping; prime iniziative di miglioramento continuo',
+'sec-skills':'Competenze',
+'sk-erp-title':'ERP e Sistemi','sk-ana-title':'Analytics e Digitale','sk-meth-title':'Metodologie e Ops',
+'sk-lvl-expert':'Esperto','sk-lvl-adv1':'Avanzato','sk-lvl-adv2':'Avanzato','sk-lvl-adv3':'Avanzato','sk-lvl-adv4':'Avanzato',
+'sk-lvl-prof1':'Competente','sk-lvl-prof2':'Competente','sk-lvl-base':'Base',
+'sk-lvl-app1':'Applicato','sk-lvl-app2':'Applicato','sk-lvl-app3':'Applicato','sk-lvl-app4':'Applicato','sk-lvl-app5':'Applicato','sk-lvl-app6':'Applicato','sk-lvl-app7':'Applicato',
+'sk-capex-name':'Gestione Progetti CAPEX','sk-risk-name':'Rischio e Continuità',
+'sk-it-title':'Italiano','sk-it-name':'Madrelingua','sk-en-title':'Inglese','sk-en-name':'Operativo — EMEA / Asia / USA',
+'sk-de-title':'Tedesco','sk-de-name':'Passivo','sk-fr-title':'Francese','sk-fr-name':'Buona comprensione scritta e orale',
+'sec-education':'Formazione e Certificazioni',
+'edu1-degree':'MSc Ingegneria — Business e Produzione','edu1-period':'2015 – 2018 · Voto Finale: A',
+'edu1-note':'Gestione delle operations, sistemi di produzione, strategia supply chain. Ricerca integrata con la pratica presso TE Connectivity.',
+'edu2-degree':'BSc Ingegneria Gestionale','edu2-school':'SUPSI, Bioggio (CH) · Erasmus: Università di Lucerna','edu2-period':'2012 – 2015 · Voto Finale: 6/6',
+'edu2-note':'Ingegneria gestionale con un semestre internazionale a Lucerna. Tesi su VSM presso TE Connectivity Bioggio.',
+'sec-contact':'Contatti',
+'contact-heading':'Aperto a nuove<br><span>opportunità.</span>',
+'contact-btn':'Invia un\'Email','contact-phone-label':'Telefono','contact-loc-label':'Sede',
+'footer-text':'<strong>Andrea Volpe</strong> · Supply Chain & Operations Manager'
+}
+};
+
+/* ── LANGUAGE TOGGLE ─────────────────────────────────────── */
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[lang] && T[lang][key]) el.innerHTML = T[lang][key];
+  });
+  document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+  document.getElementById('lang-it').classList.toggle('active', lang === 'it');
+  localStorage.setItem('cv-lang', lang);
+}
+document.getElementById('langToggle').addEventListener('click', () => {
+  setLang(currentLang === 'en' ? 'it' : 'en');
+});
+
+/* ── DARK MODE TOGGLE ────────────────────────────────────── */
+function setTheme(dark) {
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  document.getElementById('themeToggle').textContent = dark ? '🌙' : '☀️';
+  localStorage.setItem('cv-theme', dark ? 'dark' : 'light');
+}
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  setTheme(!isDark);
+});
+
+/* ── HAMBURGER MENU ──────────────────────────────────────── */
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('nav-links');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  });
+});
+
+/* ── INIT PREFERENCES ────────────────────────────────────── */
+const savedTheme = localStorage.getItem('cv-theme');
+if (savedTheme) { setTheme(savedTheme === 'dark'); }
+else if (window.matchMedia('(prefers-color-scheme: dark)').matches) { setTheme(true); }
+
+const savedLang = localStorage.getItem('cv-lang');
+if (savedLang) { setLang(savedLang); }
+else {
+  const browserLang = (navigator.language || navigator.userLanguage || '').slice(0,2).toLowerCase();
+  setLang(browserLang === 'it' ? 'it' : 'en');
+}
+
+/* ── REVEAL ANIMATION ────────────────────────────────────── */
 const observer = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
