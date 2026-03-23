@@ -1,7 +1,7 @@
 # Andrea Volpe
 ### Supply Chain & Operations Manager
 
-> *Nine years building supply chains that hold under pressure — in multinational manufacturing, across two continents of stakeholders, through ownership transitions nobody planned for.*
+> *9 years of experience navigating high-stakes transitions and €5M+ programmes. Focused on operational resilience, 95%+ OTIF performance, and building the digital tools that make it happen.*
 
 🌐 **[Portfolio → Vai al sito](https://andre93v.github.io/Andrea_Volpe_Portfolio/)**
 
