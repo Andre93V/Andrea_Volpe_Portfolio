@@ -254,6 +254,19 @@ nav {
   margin-bottom: 0.8rem; letter-spacing: -0.01em;
 }
 .project-desc { font-size: 0.875rem; line-height: 1.8; color: var(--body); margin-bottom: 1.2rem; }
+.project-actions { margin-top: 0.9rem; margin-bottom: 0.2rem; }
+#project-navis .project-meta-row { display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; margin-top: 0.9rem; }
+#project-navis .project-meta-row .project-actions { margin: 0; }
+#project-navis .project-meta-row .tags { margin-top: 0; }
+#project-navis .project-meta-row .btn {
+  min-width: auto;
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.38rem 0.85rem;
+  line-height: 1.1;
+  border-radius: 100px;
+  border-width: 1px;
+}
 
 .metrics { display: flex; flex-direction: column; gap: 0; }
 .metric-row {
@@ -699,6 +712,22 @@ footer strong { color: var(--ink); font-weight: 600; }
       <div class="tags"><span class="tag" data-i18n="p4-tag1">VSM</span><span class="tag" data-i18n="p4-tag2">KPI Design</span><span class="tag" data-i18n="p4-tag3">Power BI</span><span class="tag" data-i18n="p4-tag4">Lean Six Sigma</span></div>
     </div>
 
+    <div class="project reveal" id="project-navis">
+      <div class="project-chip" data-i18n="p5-chip">Digitalization - Manufacturing - Data Analytics</div>
+      <div class="project-title" data-i18n="p5-title">NAVIS Project (Production Digitalization)</div>
+      <p class="project-desc" data-i18n="p5-desc">Developed a web-based operations hub designed to reduce paper dependency and information latency in manufacturing. The platform connects shop-floor operators and management in a shared workflow, supporting OEE improvement (+5-10%) and faster response to downtime through collaborative real-time tracking. Built with a zero-friction rollout model to simplify adoption while keeping infrastructure and software licensing costs contained.</p>
+      <div class="metrics">
+        <div class="metric-row"><span class="metric-key" data-i18n="p5-mk1">OEE impact</span><span class="metric-val green" data-i18n="p5-mv1">+5-10%</span></div>
+        <div class="metric-row"><span class="metric-key" data-i18n="p5-mk2">Downtime response</span><span class="metric-val sm" data-i18n="p5-mv2">Real-time tracking</span></div>
+        <div class="metric-row"><span class="metric-key" data-i18n="p5-mk3">Deployment & Cost</span><span class="metric-val sm" data-i18n="p5-mv3">Zero-friction, Low infrastructure costs</span></div>
+      </div>
+      <div class="project-meta-row">
+        <div class="project-actions">
+          <a class="btn btn-primary" data-i18n="p5-demo" href="https://andre93v.github.io/NAVIS-Enterprise-Navigation-System-Demo/login.html" target="_blank" rel="noopener noreferrer">Open DEMO</a>
+        </div>
+        <div class="tags"><span class="tag" data-i18n="p5-tag1">Python, SQL, HTML, Android</span><span class="tag" data-i18n="p5-tag2">MES - MDM</span><span class="tag" data-i18n="p5-tag3">IoT</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -994,6 +1023,13 @@ en: {
 'p4-chip':'Lean · BI · Continuous Improvement','p4-title':'KPI Framework & Lean Transformation',
 'p4-desc':'Co-designed and deployed a site-wide KPI framework and performance monitoring dashboard (PIM) at TE Connectivity, combining VSM analysis with structured target-setting across production families.',
 'p4-tag2':'KPI Design',
+'p5-chip':'Digitalization - Manufacturing - Data Analytics','p5-title':'NAVIS Project (Production Digitalization)',
+'p5-desc':'Developed a web-based operations hub designed to reduce paper dependency and information latency in manufacturing. The platform connects shop-floor operators and management in a shared workflow, supporting OEE improvement (+5-10%) and faster response to downtime through collaborative real-time tracking. Built with a zero-friction rollout model to simplify adoption while keeping infrastructure and software licensing costs contained.',
+'p5-mk1':'OEE impact','p5-mv1':'+5-10%',
+'p5-mk2':'Downtime response','p5-mv2':'Real-time tracking',
+'p5-mk3':'Deployment & Cost','p5-mv3':'Zero-friction, Low infrastructure costs',
+'p5-demo':'Open DEMO',
+'p5-tag1':'Python, SQL, HTML, Android','p5-tag2':'MES - MDM','p5-tag3':'IoT',
 'sec-experience':'Expertise & Track Record',
 'exp1-date':'Jan 2023 — Present','exp1-body':'Hired as Supply Chain Manager to lead end-to-end operations and a team of 4. Shortly after joining, navigated the site through a closure announcement and subsequent acquisition — while simultaneously driving ERP migration, site reconfiguration, and EN 9100 upgrade.',
 'exp1-li1':'<strong>>95% OTIF</strong> maintained throughout plant transfer and capacity reduction',
@@ -1064,6 +1100,13 @@ it: {
 'p4-chip':'Lean · BI · Miglioramento Continuo','p4-title':'Framework KPI e Trasformazione Lean',
 'p4-desc':'Co-progettato e implementato un framework KPI a livello di sito e una dashboard di monitoraggio delle performance (PIM) presso TE Connectivity, combinando analisi VSM con la definizione strutturata di obiettivi sulle famiglie produttive.',
 'p4-tag2':'Progettazione KPI',
+'p5-chip':'Digitalizzazione - Produzione - Analisi Dati','p5-title':'Progetto NAVIS (Digitalizzazione Produzione)',
+'p5-desc':'Sviluppo di una piattaforma operativa web pensata per ridurre la dipendenza dalla carta e la latenza informativa in ambiente manifatturiero. La soluzione collega operatori di reparto e management in un flusso condiviso, supportando un miglioramento dell\'OEE (+5-10%) e una reazione piu rapida ai fermi tramite monitoraggio collaborativo in tempo reale. Progettata con approccio zero-friction per favorire un\'adozione rapida, mantenendo contenuti i costi infrastrutturali e di licenza software.',
+'p5-mk1':'Impatto OEE','p5-mv1':'+5-10%',
+'p5-mk2':'Reazione ai fermi','p5-mv2':'Tracking in tempo reale',
+'p5-mk3':'Implementazione e Costi','p5-mv3':'Zero-friction, basso costo hardware',
+'p5-demo':'Apri DEMO',
+'p5-tag1':'Python, SQL, HTML, Android','p5-tag2':'MES - MDM','p5-tag3':'IoT',
 'sec-experience':'Competenze & Percorso',
 'exp1-date':'Gen 2023 — Presente','exp1-body':'Assunto come Supply Chain Manager per guidare le operations end-to-end e un team di 4 persone. Poco dopo l\'ingresso in azienda, ho gestito la SC del sito attraverso l\'annuncio di chiusura e la successiva acquisizione — portando avanti in parallelo la migrazione ERP, la riconfigurazione del sito e supportando l\'upgrade EN 9100.',
 'exp1-li1':'<strong>>95% OTIF</strong> mantenuto durante il trasferimento delle attività e la conseguente riduzione della capacità',
@@ -1184,3 +1227,5 @@ document.querySelectorAll('.skill-card, .skills-grid, .lang-grid').forEach(el =>
 </script>
 </body>
 </html>
+
+
